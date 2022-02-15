@@ -109,4 +109,4 @@ class hepsi1:
 		if goal[0]==goal[1]:
 			return [[goal[0],goal[1]]]
 		else:
-			return [goal[0],loc[1]],[goal[0],goal[1]]]
+			return [[goal[0],loc[1]],[goal[0],goal[1]]]
