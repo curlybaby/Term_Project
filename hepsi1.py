@@ -61,7 +61,7 @@ class hepsi1:
 						pointdic[tuple(m)] = self.clrDictionary[key][1] #if the colors match, put the corresponding point from the key to the center dictionary
 			initLocs = [[25, 175],[25, 375],[25, 575],[175, 25],[375, 25],[575, 25],[175, 725],[375, 725],[575, 725]]
 			
-			def findNeighbor(firstneigbor,stepsize):
+			def findNeighbor(firstneighbor,stepsize):
 				(y,x) = firstneighbor
 				neighArr = [(y+stepsize, x), (y-stepsize, x), (y, x-stepsize), (y,x+stepsize)] #calculate the 4-neighbors
 				return neighArr
@@ -70,7 +70,7 @@ class hepsi1:
 				myqueue = PriorityQueue()
 				for i,j in enumerate(centerpoints):
 					dist = abs(loc[0]-j[0]) + abs(loc[1]-j[1])
-					myqueue.put((dist,j))
+					myqueue.put((dist,tuple(j)))
 				costloc =[]
 				for i in range(5):
 					costloc.append(myqueue.get())
@@ -82,7 +82,7 @@ class hepsi1:
 			#0ın altına düşmemeliyiz !!
 			
 			firstneighbor = closestSq(whereami,centerpoints)
-			for a,b in enumerate(firstneigbor):
+			for a,b in enumerate(firstneighbor):
 				sum=0
 				if b[0] != 0 :
 					sum=0
