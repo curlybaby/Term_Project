@@ -64,6 +64,15 @@ class hepsi1:
 					if np.array_equal(img[m[0],m[1],:],np.array(self.clrDictionary[key][0])): #check if the colors match
 						pointdic[tuple(m)] = self.clrDictionary[key][1] #if the colors match, put the corresponding point from the key to the center dictionary
 			initLocs = [[25, 175],[25, 375],[25, 575],[175, 25],[375, 25],[575, 25],[175, 725],[375, 725],[575, 725]]
+			def closestSq(loc,center):
+				myqueue = PriorityQueue()
+				for i,j in enumerate(centerpoints):
+					dist = abs(loc[0]-j[0]) + abs(loc[1]-j[1])
+					myqueue.put((dist,j))
+				nearesquare = myqueue.get()[1]
+				neighbors = [tuple(nearesquare),(nearesquare[0]+100,nearesquare[1]),(nearesquare[0],nearesquare[1]+100),(nearesquare[0]+100,nearesquare[1]+100)]
+			def 
+			###############################
 			if whereami in initLocs:
 				neighAr=findNeighbor(whereami,50)
 				for i,j in enumerate(neighAr):
