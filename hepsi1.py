@@ -101,11 +101,15 @@ class hepsi1:
 						pickme.put((-sum/b[0],b[1]))
 					if game_point-pointdic[b[1]] <= 0 and pointdic[b[1]] !=0:
 						pickme.put((sum/b[0],b[1]))
+					print(sum)
+					print(b[1])
+					print("okii")
 				goal = pickme.get()[1]
 			return goal
 
 		goal = list(bestOption(loc,img))
 		
+
 		if [goal[0],loc[1]]==[goal[0],goal[1]]:
 			return [[goal[0],goal[1]]]
 		else:
