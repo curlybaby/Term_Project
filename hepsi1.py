@@ -97,10 +97,10 @@ class hepsi1:
 							for l,m in enumerate(neighAr3):
 								if m in pointdic:
 									sum=sum+ 1.5*pointdic[m]
-					if game_point-pointdic[b[1]] >= 0:
-						pickme.put((-sum/b[0],b[1]))
-					if game_point-pointdic[b[1]] <= 0 and pointdic[b[1]] !=0:
-						pickme.put((sum/b[0],b[1]))
+					#if game_point-pointdic[b[1]] >= 0:
+					pickme.put((-sum/b[0],b[1]))
+					#if game_point-pointdic[b[1]] <= 0 and pointdic[b[1]] !=0:
+					#	pickme.put((sum/b[0],b[1]))
 					print(sum)
 					print(b[1])
 					print("okii")
