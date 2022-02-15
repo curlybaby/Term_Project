@@ -51,87 +51,59 @@ class hepsi1:
 		def bestOption(loc,img):
 			whereami=list(loc)
 
-			def findNeighbor(loc,stepsize):
-				(y,x) = loc
-				neighArr = [(y+stepsize, x), (y-stepsize, x), (y, x-stepsize), (y,x+stepsize)] #calculate the 4-neighbors
-				return neighArr
-
 			pointdic = {} #initialize the dictionary to store the points
+			
 			centerpoints = [[675, 675], [675, 575], [675, 475], [675, 375], [675, 275], [675, 175], [675, 75], [575, 675], [575, 575], [575, 475], [575, 375], [575, 275], [575, 175], [575, 75], [475, 675], [475, 575], [475, 475], [475, 375], [475, 275], [475, 175], [475, 75], [375, 675], [375, 575], [375, 475], [375, 375], [375, 275], [375, 175], [375, 75], [275, 675], [275, 575], [275, 475], [275, 375], [275, 275], [275, 175], [275, 75], [175, 675], [175, 575], [175, 475], [175, 375], [175, 275], [175, 175], [175, 75], [75, 675], [75, 575], [75, 475], [75, 375], [75, 275], [75, 175], [75, 75]]
-			pickme = PriorityQueue() #initialize the empty priority queue to sort the options
+			
 			for k,m in enumerate(centerpoints):
 				for key in self.clrDictionary: #we should iterate each key of the dictionary to match colors of the maze with corresponding points
 					if np.array_equal(img[m[0],m[1],:],np.array(self.clrDictionary[key][0])): #check if the colors match
 						pointdic[tuple(m)] = self.clrDictionary[key][1] #if the colors match, put the corresponding point from the key to the center dictionary
 			initLocs = [[25, 175],[25, 375],[25, 575],[175, 25],[375, 25],[575, 25],[175, 725],[375, 725],[575, 725]]
+			
+			def findNeighbor(firstneigbor,stepsize):
+				(y,x) = firstneighbor
+				neighArr = [(y+stepsize, x), (y-stepsize, x), (y, x-stepsize), (y,x+stepsize)] #calculate the 4-neighbors
+				return neighArr
+
 			def closestSq(loc,center):
 				myqueue = PriorityQueue()
 				for i,j in enumerate(centerpoints):
 					dist = abs(loc[0]-j[0]) + abs(loc[1]-j[1])
 					myqueue.put((dist,j))
-				nearesquare = myqueue.get()[1]
-				neighbors = [tuple(nearesquare),(nearesquare[0]+100,nearesquare[1]),(nearesquare[0],nearesquare[1]+100),(nearesquare[0]+100,nearesquare[1]+100)]
-			def 
-			###############################
-			if whereami in initLocs:
-				neighAr=findNeighbor(whereami,50)
-				for i,j in enumerate(neighAr):
-					if j in pointdic:
-						goal=[j[0],j[1]]
-			else:
-				#adjust loc to center point later
-				#egemennnn aklın bı sey geldi xd
-				#0ın altına düşmemeliyiz !!
-				neighAr1=findNeighbor(whereami,100)
-				for a,b in enumerate(neighAr1):
+				costloc =[]
+				for i in range(5):
+					costloc.append(myqueue.get())
+				return costloc
+			
+			pickme = PriorityQueue() #silinebilir
+			#adjust loc to center point later
+			#egemennnn aklın bı sey geldi xd
+			#0ın altına düşmemeliyiz !!
+			
+			firstneighbor = closestSq(whereami,centerpoints)
+			for a,b in enumerate(firstneigbor):
+				sum=0
+				if b[0] != 0 :
 					sum=0
-					if b in pointdic:
-						sum=0
-						neighAr2=findNeighbor(b,100)
-						sum= sum + 4*pointdic[b]
-						for k,t in enumerate(neighAr2):
-							if t in pointdic:
-								sum=sum+ 2*pointdic[t]
-								neighAr3=findNeighbor(t,100)
-								for l,m in enumerate(neighAr3):
-									if m in pointdic:
-										sum=sum+ 1.5*pointdic[m]
-						if game_point-pointdic[b] >= 0:
-							pickme.put((-sum,b))
-						if game_point-pointdic[b] <= 0 and pointdic[b]!=0:
-							pickme.put((sum,b))
-							
-
+					neighAr2=findNeighbor(b[1],100)
+					sum= sum + 4*pointdic[b[1]]
+					for k,t in enumerate(neighAr2):
+						if t in pointdic:
+							sum=sum+ 2*pointdic[t]
+							neighAr3=findNeighbor(t,100)
+							for l,m in enumerate(neighAr3):
+								if m in pointdic:
+									sum=sum+ 1.5*pointdic[m]
+					if game_point-pointdic[b[1]] >= 0:
+						pickme.put((-sum/b[0],b[1]))
+					if game_point-pointdic[b[1]] <= 0 and pointdic[b[1]] !=0:
+						pickme.put((sum/b[0],b[1]))
 				goal = pickme.get()[1]
 			return goal
 
 		goal = list(bestOption(loc,img))
-
-		def pathfinder(loc,goal):
-			x= goal[1]-loc[1]
-			y= goal[0]-loc[0]
-			i=0
-			path= []
-			if x>0:
-				i=0
-				while i<=x:
-					path.append([loc[0], loc[1]+i])
-					i=i+1
-			elif x<0:
-				while i<=-x:
-					path.append([loc[0], loc[1]-i])
-					i=i+1
-			elif y>0:
-				i=0
-				while i<=y:
-					path.append([loc[0]+i, loc[1]])
-					i=i+1
-			elif y<0:
-				while i<=-y:
-					path.append([loc[0]-i, loc[1]])
-					i=i+1
-			return path
-		path = pathfinder(list(loc),goal)
-		print(path)
-		return [goal]
+		
+				
+		return [[goal[0],loc[1]],[goal[0],goal[1]]]
  
