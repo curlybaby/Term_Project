@@ -105,6 +105,7 @@ class hepsi1:
 					print(b[1])
 					print("okii")
 				goal = pickme.get()[1]
+				print(goal.queue)
 			return goal
 
 		goal = list(bestOption(loc,img))
