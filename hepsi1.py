@@ -98,9 +98,9 @@ class hepsi1:
 								if m in pointdic:
 									sum=sum+ 1.5*pointdic[m]
 					if game_point-pointdic[b[1]] >= 0:
-						pickme.put((-sum/b[0],b[1]))
+						pickme.put((-sum/b[0]*100,b[1]))
 					if game_point-pointdic[b[1]] <= 0 and pointdic[b[1]] !=0:
-						pickme.put((sum/b[0],b[1]))
+						pickme.put((sum/b[0]*100,b[1]))
 				goal = pickme.get()[1]
 			return goal
 
