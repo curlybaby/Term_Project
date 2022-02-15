@@ -70,9 +70,10 @@ class hepsi1:
 				myqueue = PriorityQueue()
 				for i,j in enumerate(centerpoints):
 					dist = abs(loc[0]-j[0]) + abs(loc[1]-j[1])
-					myqueue.put((dist,tuple(j)))
+					if 0 < dist <= 105:
+						myqueue.put((dist,tuple(j)))
 				costloc =[]
-				for i in range(5):
+				for i in range(len(myqueue.queue)):
 					costloc.append(myqueue.get())
 				return costloc
 			
@@ -82,6 +83,7 @@ class hepsi1:
 			#0ın altına düşmemeliyiz !!
 			
 			firstneighbor = closestSq(whereami,centerpoints)
+			print(firstneighbor)
 			for a,b in enumerate(firstneighbor):
 				sum=0
 				if b[0] != 0 :
@@ -106,4 +108,3 @@ class hepsi1:
 		
 				
 		return [[goal[0],loc[1]],[goal[0],goal[1]]]
- 
