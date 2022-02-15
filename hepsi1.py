@@ -104,8 +104,8 @@ class hepsi1:
 					print(sum)
 					print(b[1])
 					print("okii")
+				print(pickme.queue)	
 				goal = pickme.get()[1]
-				print(goal.queue)
 			return goal
 
 		goal = list(bestOption(loc,img))
