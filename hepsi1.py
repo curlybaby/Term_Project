@@ -1,8 +1,6 @@
 import numpy as np
-import time
 import random
 from queue import PriorityQueue
-from skimage import io
 class hepsi1:
 	'''
 	This is the random player used in the colab example.
@@ -102,7 +100,10 @@ class hepsi1:
 					  #pickme.put((sum/b[0],b[1]))
 				else:
 					if game_point - pointdic[b[1]] >= 0:
-						pickme.put(((game_point - pointdic[b[1]]),b[1]))
+						if pointdic[b[1]] == 0:
+							pickme.put(((random.randint(100,110)),b[1]))
+						else:
+							pickme.put(((game_point - pointdic[b[1]]),b[1]))
 			goal= pickme.get()[1]
 			#if game_point-pointdic[goal] >= 0:
 			return goal
