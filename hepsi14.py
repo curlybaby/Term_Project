@@ -84,7 +84,7 @@ class hepsi1:
 			flag=0
 			for a,b in enumerate(firstneighbor):
 				sum=0
-				if game_point >= 50:
+				if game_point >= 100:
 					flag=1
 					sum=0
 					neighAr2=findNeighbor(b[1],100)
