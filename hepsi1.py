@@ -102,7 +102,7 @@ class hepsi1:
 					  #pickme.put((sum/b[0],b[1]))
 				else:
 					if game_point - pointdic[b[1]] >= 0:
-						pickme.put(-(game_point - pointdic[b[1]]),b[1])
+						pickme.put((-(game_point - pointdic[b[1]]),b[1]))
 			goal= pickme.get()[1]
 			#if game_point-pointdic[goal] >= 0:
 			return goal
